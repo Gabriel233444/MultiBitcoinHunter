@@ -1,5 +1,6 @@
 from hdwallet import HDWallet
 from hdwallet.symbols import BTC as SYMBOL
+from colorama import Fore , Style , Back
 from hexer import mHash
 from datetime import datetime
 import threading
@@ -21,14 +22,15 @@ p2shp = """
                                  ---***---                                         
         """
 
-print(p2shp)
+print(Fore.YELLOW + p2shp)
 
 filename = 'bch2.txt'
 with open(filename) as f :
     add = f.read().split()
 add = set(add)
-print('[*]All Address TYPE P2wSH Start With bc1 import Now...' , timer() , '\n')
-print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(M M D R Z A . C o M)~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
+print(Fore.WHITE , '[*]All Address TYPE P2PKH Start With 1 import Now...' , Back.RED , timer() , Style.RESET_ALL , '\n')
+print(
+        Fore.BLUE + '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(' + Fore.YELLOW + ' M M D R Z A . C o M ' + Fore.BLUE + ')~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
 
 r = 1
 cores = 2
@@ -42,20 +44,20 @@ def seek(r) :
         hdwallet: HDWallet = HDWallet(symbol = SYMBOL)
         hdwallet.from_private_key(private_key = mHash())
         addr = hdwallet.p2wsh_address()
-        priv = hdwallet.private_key()
-        print('Total:' ,str(z) ,'Win:' ,str(w) ,
-             str(addr) ,'-----', txx , end = '\r')
+
+        print(Fore.GREEN , 'Total:' , Fore.YELLOW , str(z) , Fore.GREEN , 'Win:' , Fore.WHITE , str(w) ,Back.BLUE, Fore.WHITE , txx , Style.RESET_ALL ,
+              end = '\r')
         z += 1
         if addr in add :
             w += 1
-            print('Winning Wallet On Database File Imported ... [LOADED]')
-            print('All Details Saved On Text File Root Path ... [WRITED]')
-            f = open("p2wpkhWinerWalletDetails.txt" , "a")
+            print(Fore.WHITE , 'Winning Wallet On Database File Imported ... [LOADED]')
+            print(Fore.CYAN , 'All Details Saved On Text File Root Path ... [WRITED]')
+            f = open("p2shWinerWalletDetails.txt" , "a")
             f.write('\n' , str(addr))
             f.write('\n' , str(priv))
             f.write('\n==========[PROGRAMMER BY MMDRZA.CoM]==========\n')
             f.close()
-            print('Information File Name ========> p2wshWinerWalletDetails.txt [OK]')
+            print(Fore.MAGENTA , 'Information File Name ========> p2shWinerWalletDetails.txt [OK]')
             continue
 
 
